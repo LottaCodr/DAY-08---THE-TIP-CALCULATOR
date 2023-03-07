@@ -39,10 +39,13 @@ class _TipMeState extends State<TipMe> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TIP ME CALCULATOR'),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
       ),
 
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
+
         children: [
           const SizedBox(height: 20,),
 
@@ -59,20 +62,29 @@ class _TipMeState extends State<TipMe> {
 
           Text('Tip Percentage: ${_tipPercentage.toStringAsFixed(0)} %',
           style: const TextStyle(
-            fontSize: 16
+            fontSize: 18
           ),),
 
           Slider(
               value: _tipPercentage,
               min: 0,
-              max: 3,
-              onChanged: _updateTipPercentage ),
+              max: 100,
+              onChanged: (value) {
+                setState(() {
+                  _tipPercentage = value;
+                });
+              }  ),
 
           const SizedBox(height: 20,),
-          
-          Text('amount: ${_calculateTotalAmount().toStringAsFixed(2)}')
+
+          Text('amount: ${_calculateTotalAmount().toStringAsFixed(2)}',
+          style: const TextStyle(
+            fontSize: 18
+          ),)
         ],
       ),
     );
   }
 }
+
+
